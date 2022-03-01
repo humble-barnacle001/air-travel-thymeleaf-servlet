@@ -43,7 +43,7 @@ jobs:
         with:
           name: java-app
 
-      - run: ll
+      - run: ls -l
       - run: sudo apt install -y tree
       - run: tree
 #       - name: Deploy to Heroku
