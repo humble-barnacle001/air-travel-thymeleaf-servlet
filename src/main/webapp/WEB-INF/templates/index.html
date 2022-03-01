@@ -7,7 +7,12 @@
 </head>
 
 <body>
-    <h1>Thymeleaf 3 + Servlet 3 example</h1>
+    <h1>Thymeleaf 3 + Servlet 4 example</h1>
+    <form action="?" method="get">
+        <label for="name">Enter name: </label>
+        <input type="text" id="name" name="name">
+        <input type="submit" value="Submit">
+    </form>
     <p>
         Hello <span th:text="${recipient}">Peter</span>!!!
     </p>
