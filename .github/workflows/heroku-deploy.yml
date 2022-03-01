@@ -40,6 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - run: rm -r *
       - run: sudo apt install -y tree
       - run: tree
 
@@ -52,12 +53,12 @@ jobs:
       - run: sudo apt install -y tree
       - run: tree
 
-      # - name: Fetch the web app runner for Heroku
-      #   run: wget https://search.maven.org/remotecontent?filepath=com/heroku/webapp-runner/9.0.52.1/webapp-runner-9.0.52.1.jar -O webapp-runner.jar
+      - name: Fetch the web app runner for Heroku
+        run: wget https://search.maven.org/remotecontent?filepath=com/heroku/webapp-runner/9.0.52.1/webapp-runner-9.0.52.1.jar -O webapp-runner.jar
 
-      # - name: Deploy to Heroku
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-      #     heroku_app_name: ${{ env.HEROKU_APP_NAME }}
-      #     heroku_email: ${{ secrets.HEROKU_EMAIL }}
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
