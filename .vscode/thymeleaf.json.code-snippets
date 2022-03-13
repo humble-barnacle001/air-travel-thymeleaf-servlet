@@ -1,0 +1,49 @@
+{
+    "Thymeleaf comment": {
+        "prefix": "tcom",
+        "body": "<!--/* $1 */-->"
+    },
+    "Thymeleaf value": {
+        "prefix": "tval",
+        "body": "th:value=\"\\${$1.$2}\""
+    },
+    "Thymeleaf text": {
+        "prefix": "ttex",
+        "body": "th:text=\"\\${$1.$2}\""
+    },
+    "Thymeleaf local": {
+        "prefix": "twit",
+        "body": "th:with=\"x=$1,y=$2\""
+    },
+    "Thymeleaf link": {
+        "prefix": "tlink",
+        "body": "th:href=\"\\@{'/' + \\${$1.$2}}\""
+    },
+    "Thymeleaf if": {
+        "prefix": "tif",
+        "body": "th:if=\"\\${$1}\""
+    },
+    "Thymeleaf unless": {
+        "prefix": "tif",
+        "body": "th:unless=\"\\${$1}\""
+    },
+    "Thymeleaf switch": {
+        "prefix": "tswit",
+        "body": [
+            "<div th:switch=\"\\${$1}\">",
+            "\t<p th:case=\"$2\" th:text=\"\\${$3}\"></p>",
+            "\t<p th:case=\"$4\" th:text=\"\\${$5}\"></p>",
+            "\t <p th: case = \"*\"> Not applicable </ p>"
+        ]
+    },
+    "Thymeleaf for": {
+        "prefix": "tfor",
+        "body": [
+            "<table>",
+            "<tr th:each=\"$2:${$1}\">",
+            "\t<td th:text=\"${$3.$4}\">",
+            "\t<td th:text=\"${$5.$6}\">",
+            "\t<td th:text=\"${$7.$8}\">"
+        ]
+    }
+}

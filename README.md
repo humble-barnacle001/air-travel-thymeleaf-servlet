@@ -4,7 +4,7 @@ A basic air travel website using servlets and Thymeleaf templates
 
 ## Setup
 
-`mvn install clean`
+`mvn clean install`
 
 ## Run
 
