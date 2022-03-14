@@ -55,15 +55,15 @@
                 Special Offers
             </h2>
             <div class="row mt-5">
-                <div class="col-12 col-md-6 col-lg-4" th:each="offer:${offers}" th:if="${offer.getValue2()}">
+                <div class="col-12 col-md-6 col-lg-4" th:each="offer:${offers}"
+                    th:if="${offer.getUntil() >= currentTime}">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="h4 card-title text-danger">
-                                Tour Package @ &#8377;<span th:text="${offer.getValue3()}"></span>
+                                Tour Package @ <span th:text="${offer.getAmt()}"></span>
                             </h3>
                             <p class="card-text">
-                                <span th:text="${offer.getValue0()}"></span> to <span
-                                    th:text="${offer.getValue1()}"></span>
+                                <span th:text="${offer.getFrom()}"></span> to <span th:text="${offer.getTo()}"></span>
                             </p>
                         </div>
                     </div>
