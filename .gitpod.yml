@@ -1,3 +1,10 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: "Load Enviornment Variables"
+    command: eval $(gp env -e $(cat .env | xargs))
+
 vscode:
   extensions:
     - redhat.vscode-xml
