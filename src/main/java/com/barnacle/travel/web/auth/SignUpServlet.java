@@ -34,9 +34,12 @@ public class SignUpServlet extends HttpServlet {
         MongoDatabase db = (MongoDatabase) sc.getAttribute("db");
         MongoCollection<User> collection = db.getCollection("users", User.class);
         long count = collection.countDocuments(Filters.eq("email", email));
-        if (count != 0)
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Email already registered!");
-        else {
+        if (count != 0) {
+            resp.setHeader("Refresh", "5; URL=" + req.getContextPath() + "/auth");
+            resp.sendError(
+                    HttpServletResponse.SC_BAD_REQUEST,
+                    "Email already registered! Please try a different email!");
+        } else {
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             long currentTime = new Date().getTime();
             User newUser = new User(email, name, hashedPassword, currentTime, false);
@@ -49,6 +52,7 @@ public class SignUpServlet extends HttpServlet {
             } else {
                 session.setAttribute("isLoggedIn", Boolean.FALSE);
 
+                resp.setHeader("Refresh", "2; URL=" + req.getContextPath() + "/");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }

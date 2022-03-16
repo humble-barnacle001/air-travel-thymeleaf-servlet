@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             session.setAttribute("isLoggedIn", Boolean.FALSE);
 
+            resp.setHeader("Refresh", "2; URL=" + req.getContextPath() + "/auth");
             resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid Credentials");
         }
     }
