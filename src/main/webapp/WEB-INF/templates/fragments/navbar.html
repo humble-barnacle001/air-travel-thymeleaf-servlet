@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+
+    <body>
+        <nav
+            class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom border-3"
+            th:fragment="navbar(current)"
+        >
+            <div class="container-fluid">
+                <a class="navbar-brand mb-0 h1 text-primary fw-bold" href="/">
+                    TRAVEL AGENCY
+                </a>
+                <button
+                    type="button"
+                    class="navbar-toggler"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    class="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                >
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <span
+                            th:replace="fragments/navlink :: navlink('/','Home',${current},0)"
+                        ></span>
+                        <span
+                            th:replace="fragments/navlink :: navlink('/search','Search',${current},1)"
+                        ></span>
+                        <span
+                            th:replace="fragments/navlink :: navlink('/gallery','Gallery',${current},2)"
+                        ></span>
+                        <span
+                            th:replace="fragments/navlink :: navlink( ${isLoggedIn} ? '/logOut' : '/auth' , ${isLoggedIn} ? 'LogOut' : 'Login/SignUp', ${current}, 3)"
+                        ></span>
+                        <!-- <span
+                            th:replace="fragments/navlink :: navlink('/auth','Login/SignUp',${current},3)"
+                            th:unless="${isLoggedIn}"
+                        ></span> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>
