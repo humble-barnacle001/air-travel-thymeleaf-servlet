@@ -38,7 +38,7 @@
                             th:replace="fragments/navlink :: navlink('/search','Search',${current},1)"
                         ></span>
                         <span
-                            th:replace="fragments/navlink :: navlink('/gallery','Gallery',${current},2)"
+                            th:replace="fragments/navlink :: navlink('/dashboard','Dashboard',${current},2)"
                         ></span>
                         <span
                             th:replace="fragments/navlink :: navlink( ${isLoggedIn} ? '/logOut' : '/auth' , ${isLoggedIn} ? 'LogOut' : 'Login/SignUp', ${current}, 3)"

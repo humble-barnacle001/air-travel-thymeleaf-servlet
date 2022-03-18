@@ -1,29 +1,37 @@
 package com.barnacle.travel.database.models;
 
-import java.text.NumberFormat;
-import java.util.Locale;
+import org.bson.types.ObjectId;
 
 public class Offer {
 
-    private String from;
-    private String to;
+    private ObjectId id;
+    private ObjectId flightID;
     private long until;
-    private String amt;
+    private double discount;
 
-    public void setFrom(String from) {
-        this.from = from;
+    public Offer() {
     }
 
-    public String getFrom() {
-        return from;
+    public Offer(ObjectId flightID, long until, double discount) {
+        this.flightID = flightID;
+        this.until = until;
+        this.discount = discount;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public ObjectId getId() {
+        return id;
     }
 
-    public String getTo() {
-        return to;
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public void setFlightID(ObjectId flightID) {
+        this.flightID = flightID;
+    }
+
+    public ObjectId getFlightID() {
+        return this.flightID;
     }
 
     public void setUntil(long until) {
@@ -34,27 +42,18 @@ public class Offer {
         return until;
     }
 
-    public void setAmt(String amt) {
-        try {
-            NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
-            cf.setMaximumFractionDigits(0);
-            this.amt = cf.format(Long.valueOf(amt));
-        } catch (Exception e) {
-            // TODO: Deny value on exception
-            System.out.println(e);
-            System.out.println(amt);
-            System.out.println("CANNOT FORMAT");
-            this.amt = amt;
-        }
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
-    public String getAmt() {
-        return amt;
+    public double getDiscount() {
+        return this.discount;
     }
 
     @Override
     public String toString() {
-        return "";
+        return "ObjectId: " + flightID +
+                "\nUntil: " + until +
+                "\nDiscount: " + discount;
     }
-
 }

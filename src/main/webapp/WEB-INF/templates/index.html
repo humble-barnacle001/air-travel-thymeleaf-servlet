@@ -63,12 +63,30 @@
                             <div class="card-body">
                                 <h3 class="h4 card-title text-danger">
                                     Special Deal @
-                                    <span th:text="${offer.getAmt()}"></span>
+                                    <span th:text="${offer.finalAmt()}"></span>
                                 </h3>
                                 <p class="card-text">
-                                    <span th:text="${offer.getFrom()}"></span>
+                                    <small class="text-success">
+                                        Flat
+                                        <span
+                                            th:text="${offer.getDiscount()}"
+                                        ></span>
+                                        % off
+                                    </small>
+                                </p>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <span
+                                        th:text="${offer.flight.getCompany()}"
+                                    ></span>
+                                </h6>
+                                <p class="card-text">
+                                    <span
+                                        th:text="${offer.flight.getFrom()}"
+                                    ></span>
                                     to
-                                    <span th:text="${offer.getTo()}"></span>
+                                    <span
+                                        th:text="${offer.flight.getTo()}"
+                                    ></span>
                                 </p>
                             </div>
                         </div>

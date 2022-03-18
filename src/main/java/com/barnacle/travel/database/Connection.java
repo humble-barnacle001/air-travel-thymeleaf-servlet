@@ -35,7 +35,8 @@ public class Connection implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+        CodecRegistry pojoCodecRegistry = fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         client = MongoClients.create(MONGO_STRING);
         db = client.getDatabase("y_3_s_e_it_a3").withCodecRegistry(pojoCodecRegistry);
