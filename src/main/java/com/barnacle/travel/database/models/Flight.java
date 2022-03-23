@@ -11,42 +11,36 @@ public class Flight {
     private int amt;
     private String company;
 
-    public Flight() {
-    }
-
-    public Flight(String from, String to, int amt, String company) {
-        this.from = from;
-        this.to = to;
-        this.amt = amt;
-        this.company = company;
-    }
-
     public ObjectId getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public Flight setId(ObjectId id) {
         this.id = id;
+        return this;
     }
 
-    public void setFrom(String from) {
+    public Flight setFrom(String from) {
         this.from = from;
+        return this;
     }
 
     public String getFrom() {
         return from;
     }
 
-    public void setTo(String to) {
+    public Flight setTo(String to) {
         this.to = to;
+        return this;
     }
 
     public String getTo() {
         return to;
     }
 
-    public void setAmt(int amt) {
+    public Flight setAmt(int amt) {
         this.amt = amt;
+        return this;
     }
 
     public int getAmt() {
@@ -57,8 +51,13 @@ public class Flight {
         return Formatter.formatAsCurrency(amt);
     }
 
-    public void setCompany(String company) {
+    public String formattedTravelPlanString() {
+        return from + " to " + to;
+    }
+
+    public Flight setCompany(String company) {
         this.company = company;
+        return this;
     }
 
     public String getCompany() {

@@ -10,59 +10,54 @@ public class User {
     private long since;
     private boolean isManager;
 
-    public User() {
-    }
-
-    public User(String email, String name, String password, long currentTime, boolean ismanager) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.since = currentTime;
-        this.isManager = ismanager;
-    }
-
     public ObjectId getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public User setId(ObjectId id) {
         this.id = id;
+        return this;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setSince(long since) {
+    public User setSince(long since) {
         this.since = since;
+        return this;
     }
 
     public long getSince() {
         return since;
     }
 
-    public void setIsManager(boolean ismanager) {
+    public User setIsManager(boolean ismanager) {
         this.isManager = ismanager;
+        return this;
     }
 
     public boolean getIsManager() {

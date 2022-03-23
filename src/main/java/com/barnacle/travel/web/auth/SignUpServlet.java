@@ -42,8 +42,14 @@ public class SignUpServlet extends HttpServlet {
         } else {
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             long currentTime = new Date().getTime();
-            User newUser = new User(email, name, hashedPassword, currentTime, false);
-            InsertOneResult user = collection.insertOne(newUser);
+            InsertOneResult user = collection.insertOne(
+                    new User()
+                            .setEmail(email)
+                            .setName(name)
+                            .setPassword(hashedPassword)
+                            .setSince(currentTime)
+                            .setIsManager(false));
+
             if (user.wasAcknowledged()) {
                 session.setAttribute("userID", user.getInsertedId());
                 session.setAttribute("isLoggedIn", Boolean.TRUE);

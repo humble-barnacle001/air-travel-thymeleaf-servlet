@@ -53,45 +53,7 @@
                 >
                     Special Offers
                 </h2>
-                <div class="row mt-5">
-                    <div
-                        class="col-12 col-md-6 col-lg-4 mt-3"
-                        th:each="offer:${offers}"
-                        th:if="${offer.getUntil() >= currentTime}"
-                    >
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="h4 card-title text-danger">
-                                    Special Deal @
-                                    <span th:text="${offer.finalAmt()}"></span>
-                                </h3>
-                                <p class="card-text">
-                                    <small class="text-success">
-                                        Flat
-                                        <span
-                                            th:text="${offer.getDiscount()}"
-                                        ></span>
-                                        % off
-                                    </small>
-                                </p>
-                                <h6 class="card-subtitle mb-2 text-muted">
-                                    <span
-                                        th:text="${offer.flight.getCompany()}"
-                                    ></span>
-                                </h6>
-                                <p class="card-text">
-                                    <span
-                                        th:text="${offer.flight.getFrom()}"
-                                    ></span>
-                                    to
-                                    <span
-                                        th:text="${offer.flight.getTo()}"
-                                    ></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div th:replace="fragments/offers :: offers"></div>
             </div>
         </section>
         <!--END HOME SECTION-->

@@ -19,7 +19,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
-@WebFilter({ "/dashboard" })
+@WebFilter({ "/dashboard", "/offer" })
 public class LoggedFilter implements Filter {
 
     @Override
@@ -40,7 +40,7 @@ public class LoggedFilter implements Filter {
             MongoCollection<User> collection = db.getCollection("users", User.class);
 
             User user = collection.find(Filters.eq("_id", session.getAttribute("userID"))).first();
-            if (user != null) {
+            if (user != null && user.getIsManager()) {
                 session.setAttribute("user", user);
                 chain.doFilter(request, response);
             }
@@ -48,7 +48,7 @@ public class LoggedFilter implements Filter {
             resp.setHeader("Refresh", "5; URL=" + req.getContextPath() + "/auth");
             resp.sendError(
                     HttpServletResponse.SC_FORBIDDEN,
-                    "Login Required! Redirecting to login page in 5 seconds!!");
+                    "Admin login Required! Redirecting to login page in 5 seconds!!");
         }
     }
 

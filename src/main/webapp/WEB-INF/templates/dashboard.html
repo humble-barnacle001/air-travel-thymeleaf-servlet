@@ -14,6 +14,10 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
             rel="stylesheet"
         />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+            rel="stylesheet"
+        />
         <link href="/static/css/style.css" rel="stylesheet" />
         <link
             rel="shortcut icon"
@@ -29,18 +33,164 @@
         <div th:replace="fragments/navbar :: navbar(2)"></div>
         <!--END NAV SECTION -->
 
-        <div class="pt-5 mt-5"></div>
-        <h1>ADMIN DASHBOARD</h1>
+        <!-- Offer Modal -->
+        <div
+            class="modal fade"
+            id="addOffer"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="addOfferLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addOfferLabel">
+                            Add new offer
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form
+                            id="addOfferForm"
+                            name="addOfferForm"
+                            class="row g-3 needs-validation"
+                            action="/offer"
+                            novalidate
+                        >
+                            <div class="col-12">
+                                <label for="chooseFlight" class="form-label">
+                                    Flight
+                                </label>
+                                <select
+                                    name="flightID"
+                                    class="form-select"
+                                    id="chooseFlight"
+                                    required
+                                >
+                                    <option selected disabled value="">
+                                        Choose a flight
+                                    </option>
+                                    <option
+                                        th:each="flight:${flights}"
+                                        th:value="${flight.getId()}"
+                                        th:text="${flight.formattedTravelPlanString()}"
+                                    ></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid Flight.
+                                </div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="discount" class="form-label">
+                                    Discount Percent
+                                </label>
+                                <input
+                                    name="discount"
+                                    type="number"
+                                    class="form-control"
+                                    id="discount"
+                                    min="0"
+                                    step="0.01"
+                                    max="100"
+                                    required
+                                />
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">
+                                    Please choose a discount between 0 and 100
+                                    with steps of 0.01.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="until" class="form-label">
+                                    Offer Until
+                                </label>
+                                <div class="input-group date">
+                                    <input
+                                        name="until"
+                                        type="text"
+                                        class="form-control"
+                                        id="until"
+                                        placeholder="DD/MM/YYYY"
+                                        required
+                                    />
+                                    <span class="input-group-text">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-calendar"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <div class="invalid-feedback">
+                                        Please choose a valid date.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success">
+                                    Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-5 mt-5">
+            <h1 class="text-center text-info">ADMIN DASHBOARD</h1>
+        </div>
+
+        <div id="alertPlaceholder" class="mx-3"></div>
 
         <!-- OFFERS SECTION -->
-        <hr />
-        <h2>OFFERS HERE</h2>
-        <hr />
+        <section>
+            <div class="container my-3 py-3">
+                <h2 class="text-center">All Offers</h2>
+                <div th:replace="fragments/offers :: offers"></div>
+                <div class="text-center pt-3">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addOffer"
+                    >
+                        Add new offer
+                    </button>
+                </div>
+            </div>
+        </section>
         <!-- END OFFERS SECTION -->
 
         <!-- FLIGHTS SECTION -->
-        <h3>FLIGHTS LIST HERE</h3>
-        <hr />
+        <section>
+            <h2 class="text-center">FLIGHTS HERE</h2>
+        </section>
         <div class="vh-100"></div>
         <!-- END FLIGHTS SECTION -->
 
@@ -49,5 +199,9 @@
         <!-- END FOOTER SECTION -->
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="/static/js/offer.js"></script>
     </body>
 </html>
