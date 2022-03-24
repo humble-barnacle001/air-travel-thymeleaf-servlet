@@ -34,16 +34,20 @@ public class LoggedFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        Optional<Boolean> isLoggedIn = Optional.ofNullable((Boolean) session.getAttribute("isLoggedIn"));
-        if (isLoggedIn.orElse(false)) {
-            MongoDatabase db = (MongoDatabase) req.getServletContext().getAttribute("db");
-            MongoCollection<User> collection = db.getCollection("users", User.class);
+        Optional<Boolean> isLoggedIn = Optional.ofNullable(
+                (Boolean) session.getAttribute("isLoggedIn"));
 
-            User user = collection.find(Filters.eq("_id", session.getAttribute("userID"))).first();
-            if (user != null && user.getIsManager()) {
-                session.setAttribute("user", user);
+        MongoDatabase db = (MongoDatabase) req.getServletContext().getAttribute("db");
+        MongoCollection<User> collection = db.getCollection("users", User.class);
+        User user = collection.find(Filters.eq("_id", session.getAttribute("userID"))).first();
+
+        if (isLoggedIn.orElse(false) && user != null) {
+            session.setAttribute("user", user);
+
+            if (user.getIsManager())
                 chain.doFilter(request, response);
-            }
+            else
+                resp.sendRedirect(req.getContextPath() + "/search");
         } else {
             resp.setHeader("Refresh", "5; URL=" + req.getContextPath() + "/auth");
             resp.sendError(

@@ -51,7 +51,7 @@ public class SignUpServlet extends HttpServlet {
                             .setIsManager(false));
 
             if (user.wasAcknowledged()) {
-                session.setAttribute("userID", user.getInsertedId());
+                session.setAttribute("userID", user.getInsertedId().asObjectId().getValue());
                 session.setAttribute("isLoggedIn", Boolean.TRUE);
 
                 resp.sendRedirect(req.getContextPath() + "/dashboard");
