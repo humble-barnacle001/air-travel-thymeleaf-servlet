@@ -9,7 +9,7 @@
         <div class="row" id="offers" th:fragment="offers">
             <div
                 th:each="offer:${offers}"
-                th:id="${offer.getId().toHexString()}"
+                th:id="'offer-' + ${offer.getId().toHexString()}"
                 class="col-12 col-md-6 col-lg-4 mt-3"
                 th:if="${offer.getUntil() >= currentTime}"
             >

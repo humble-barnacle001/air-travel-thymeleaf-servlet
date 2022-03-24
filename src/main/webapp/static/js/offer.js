@@ -58,9 +58,8 @@ $(document).on("submit", "#addOfferForm", function (event) {
         .done((response) => {
             const d = parser.parseFromString(response, "text/html");
             const newOffer = document.createElement("div");
-            newOffer.classList.add("col-12", "col-md-6", "col-lg-4", "mt-3");
-            newOffer.innerHTML = d.body.innerHTML;
-            offersParent.appendChild(newOffer);
+            newOffer.innerHTML = d.body.innerHTML.trim();
+            offersParent.appendChild(newOffer.firstChild);
             bsAlert("Offer added successfully", "success");
             scrollTo(0, 0);
         })
@@ -77,7 +76,7 @@ $(document).on("click", ".delete-offer-button", function (event) {
         type: "DELETE",
     })
         .done(() => {
-            offersParent.removeChild(document.getElementById(id));
+            offersParent.removeChild(document.getElementById(`offer-${id}`));
             scrollTo(0, 0);
             bsAlert("Successfully deleted the offer", "success");
         })

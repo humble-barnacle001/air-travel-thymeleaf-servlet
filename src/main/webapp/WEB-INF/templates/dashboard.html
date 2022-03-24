@@ -18,6 +18,10 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        />
         <link href="/static/css/style.css" rel="stylesheet" />
         <link
             rel="shortcut icon"
@@ -163,7 +167,7 @@
         </div>
 
         <div class="py-5 mt-5">
-            <h1 class="text-center text-info">ADMIN DASHBOARD</h1>
+            <h1 class="text-center text-warning">ADMIN DASHBOARD</h1>
         </div>
 
         <div id="alertPlaceholder" class="mx-3"></div>
@@ -189,7 +193,20 @@
 
         <!-- FLIGHTS SECTION -->
         <section>
-            <h2 class="text-center">FLIGHTS HERE</h2>
+            <div class="container my-3 py-3">
+                <h2 class="text-center">All Flights</h2>
+                <div th:replace="fragments/flights :: flights"></div>
+                <div class="text-center pt-3">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addFlight"
+                    >
+                        Add new flight
+                    </button>
+                </div>
+            </div>
         </section>
         <div class="vh-100"></div>
         <!-- END FLIGHTS SECTION -->

@@ -2,6 +2,11 @@
 <html lang="en">
     <head> </head>
     <body>
-        <div th:replace="fragments/offercard :: offercard(${offer})"></div>
+        <div
+            th:id="'offer-' + ${offer.getId().toHexString()}"
+            class="col-12 col-md-6 col-lg-4 mt-3"
+        >
+            <div th:replace="fragments/offercard :: offercard(${offer})"></div>
+        </div>
     </body>
 </html>
