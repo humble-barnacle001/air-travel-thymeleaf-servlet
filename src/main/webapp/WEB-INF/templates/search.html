@@ -21,7 +21,7 @@
             type="image/x-icon"
         />
 
-        <!-- <link rel="stylesheet" href="/src/main/webapp/static/css/style.css"> -->
+        <!-- <link rel="stylesheet" href="/src/main/webapp/static/css/style.css" /> -->
     </head>
 
     <body>
@@ -29,12 +29,73 @@
         <div th:replace="fragments/navbar :: navbar(1)"></div>
         <!--END NAV SECTION -->
 
-        <div class="pt-5 mt-5"></div>
-        <h1>SEARCH FLIGHTS</h1>
+        <div class="pt-5 mt-5">
+            <h1 class="text-center">SEARCH FLIGHTS</h1>
+        </div>
 
         <!-- SEARCH SECTION -->
-        <div class="vh-100"></div>
+        <section>
+            <div class="container my-3 py-3">
+                <form class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <div class="form-floating">
+                            <input
+                                name="from"
+                                id="from"
+                                type="text"
+                                class="form-control"
+                                placeholder="city"
+                                required
+                            />
+                            <label for="from">Source City</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-floating">
+                            <input
+                                name="to"
+                                id="to"
+                                type="text"
+                                class="form-control"
+                                placeholder="city"
+                                required
+                            />
+                            <label for="to">Destination City</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
         <!-- END SEARCH SECTION -->
+
+        <!-- RESULTS SECTION -->
+        <div class="vh-100" th:unless="${isSearch}"></div>
+        <section th:if="${isSearch}">
+            <div class="container my-3 py-3">
+                <h2 class="mx-auto text-warning text-center py-3 mb-5">
+                    You searched for flights
+                    <br />
+                    from
+                    <span class="text-info" th:text="${from}"></span>
+                    to
+                    <span class="text-info" th:text="${to}"></span>
+                </h2>
+                <div th:if="${flights}">
+                    <div th:replace="fragments/flights :: flights"></div>
+                </div>
+                <div th:unless="${flights}">
+                    <h3 class="text-danger text-center">No results found</h3>
+                </div>
+            </div>
+        </section>
+        <!-- END RESULTS SECTION -->
 
         <!--FOOTER SECTION -->
         <div th:replace="fragments/footer :: footer"></div>

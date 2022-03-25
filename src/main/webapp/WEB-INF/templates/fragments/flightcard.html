@@ -3,13 +3,27 @@
     <head></head>
     <body>
         <div class="card" th:fragment="flightcard(flight)">
+            <img
+                th:src="'https://source.unsplash.com/random/400x300?airplane&sig=' + ${flight.getId().toHexString()}"
+                class="card-img-top"
+                alt="Airplane photo"
+                th:unless="${isAdmin}"
+            />
             <div class="card-body">
                 <h3 class="h4 text-success text-center">
                     <span
                         th:text="${flight.formattedTravelPlanString()}"
                     ></span>
                 </h3>
-                <h6 class="card-subtitle mb-2 text-muted">
+                <!-- TODO: enable via string when searched -->
+                <!-- <h6 class="card-subtitle mb-2 text-muted" th:if="${isSearch}">
+                    Via
+                    <span th:text="${flight.getTravelVia()}"></span>
+                </h6> -->
+                <h6
+                    class="card-subtitle mb-2 text-muted"
+                    th:unless="${isSearch}"
+                >
                     By
                     <span th:text="${flight.getCompany()}"></span>
                 </h6>

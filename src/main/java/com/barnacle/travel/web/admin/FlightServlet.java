@@ -44,6 +44,7 @@ public class FlightServlet extends HttpServlet {
                 TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(sc);
                 WebContext context = new WebContext(req, resp, sc);
                 context.setVariable("flight", newFlight);
+                context.setVariable("isAdmin", Boolean.TRUE);
 
                 resp.setContentType("text/html;charset=UTF-8");
                 engine.process("newflight", context, resp.getWriter());
