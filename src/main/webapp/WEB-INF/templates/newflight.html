@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> </head>
+    <body>
+        <div
+            th:id="'flight-' + ${flight.getId().toHexString()}"
+            class="col-12 col-md-6 col-lg-4 mt-3"
+            th:attr="travel-plan=${flight.formattedTravelPlanString()}"
+        >
+            <div
+                th:replace="fragments/flightcard :: flightcard(${flight})"
+            ></div>
+        </div>
+    </body>
+</html>

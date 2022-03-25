@@ -30,7 +30,6 @@ public class DashServlet extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(sc);
         WebContext context = CustomWebContext.generateContext(req, resp, sc);
-        // TODO: Add or delete the flights
         context.setVariable("flights", collection.find());
         context.setVariable("offers", DataFetcher.fetchAllOffers(db));
         context.setVariable("isAdmin", Boolean.TRUE);

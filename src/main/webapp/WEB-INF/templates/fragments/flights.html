@@ -12,40 +12,9 @@
                 th:id="'flight-' + ${flight.getId().toHexString()}"
                 class="col-12 col-md-6 col-lg-4 mt-3"
             >
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h3 class="h4 text-info">
-                                <span
-                                    th:text="${flight.formattedTravelPlanString()}"
-                                ></span>
-                            </h3>
-                            <button
-                                th:attr="delete-id=${flight.getId().toHexString()}"
-                                type="button"
-                                class="btn delete-flight-button"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Delete flight"
-                                th:if="${isAdmin}"
-                            >
-                                <span class="text-danger">
-                                    <i class="bi bi-trash"></i>
-                                </span>
-                            </button>
-                        </div>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            By
-                            <span th:text="${flight.getCompany()}"></span>
-                        </h6>
-                        <p class="card-text text-danger">
-                            Cost:
-                            <span
-                                th:text="${flight.formattedAmtString()}"
-                            ></span>
-                        </p>
-                    </div>
-                </div>
+                <div
+                    th:replace="fragments/flightcard :: flightcard(${flight})"
+                ></div>
             </div>
         </div>
     </body>

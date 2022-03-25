@@ -20,7 +20,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 @WebFilter({ "/dashboard", "/offer" })
-public class LoggedFilter implements Filter {
+public class AdminFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

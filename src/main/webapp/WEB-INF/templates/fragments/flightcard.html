@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head></head>
+    <body>
+        <div class="card" th:fragment="flightcard(flight)">
+            <div class="card-body">
+                <h3 class="h4 text-success text-center">
+                    <span
+                        th:text="${flight.formattedTravelPlanString()}"
+                    ></span>
+                </h3>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    By
+                    <span th:text="${flight.getCompany()}"></span>
+                </h6>
+                <p class="card-text text-danger">
+                    Cost:
+                    <span th:text="${flight.formattedAmtString()}"></span>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

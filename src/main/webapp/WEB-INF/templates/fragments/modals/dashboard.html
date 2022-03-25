@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> </head>
+    <body>
+        <div
+            class="modal fade"
+            id="addOffer"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="addOfferLabel"
+            aria-hidden="true"
+            th:fragment="offerModal"
+        >
+            <div
+                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addOfferLabel">
+                            Add new offer
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form
+                            id="addOfferForm"
+                            name="addOfferForm"
+                            class="row g-3 needs-validation"
+                            action="/offer"
+                            novalidate
+                        >
+                            <div class="col-12">
+                                <label for="chooseFlight" class="form-label">
+                                    Flight
+                                </label>
+                                <select
+                                    name="flightID"
+                                    class="form-select"
+                                    id="chooseFlight"
+                                    required
+                                >
+                                    <option selected disabled value="">
+                                        Choose a flight
+                                    </option>
+                                    <option
+                                        th:each="flight:${flights}"
+                                        th:value="${flight.getId()}"
+                                        th:text="${flight.formattedTravelPlanString()}"
+                                    ></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid Flight.
+                                </div>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="discount" class="form-label">
+                                    Discount Percent
+                                </label>
+                                <input
+                                    name="discount"
+                                    type="number"
+                                    class="form-control"
+                                    id="discount"
+                                    min="0"
+                                    step="0.01"
+                                    max="100"
+                                    required
+                                />
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">
+                                    Please choose a discount between 0 and 100
+                                    with steps of 0.01.
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="until" class="form-label">
+                                    Offer Until
+                                </label>
+                                <div class="input-group date">
+                                    <input
+                                        name="until"
+                                        type="text"
+                                        class="form-control"
+                                        id="until"
+                                        placeholder="DD/MM/YYYY"
+                                        required
+                                    />
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar"></i>
+                                    </span>
+                                    <div class="invalid-feedback">
+                                        Please choose a valid date.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success">
+                                    Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="modal fade"
+            id="addFlight"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="addFlightLabel"
+            aria-hidden="true"
+            th:fragment="flightModal"
+        >
+            <div
+                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addFlightLabel">
+                            Add new offer
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form
+                            id="addFlightForm"
+                            name="addFlightForm"
+                            class="row g-3 needs-validation"
+                            action="/flight"
+                            novalidate
+                        >
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="company"
+                                        type="text"
+                                        maxlength="25"
+                                        class="form-control"
+                                        id="flightCompany"
+                                        placeholder="Company Name"
+                                        required
+                                    />
+                                    <label for="flightCompany">
+                                        Flight Company
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Please type a valid company name.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="from"
+                                        type="text"
+                                        maxlength="25"
+                                        class="form-control"
+                                        id="flightFrom"
+                                        placeholder="Source City"
+                                        required
+                                    />
+                                    <label for="flightFrom">
+                                        Flight Source
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Please type a valid source city.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="to"
+                                        type="text"
+                                        maxlength="25"
+                                        class="form-control"
+                                        id="flightTo"
+                                        placeholder="Destination City"
+                                        required
+                                    />
+                                    <label for="flightTo">
+                                        Flight Destination
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Please type a valid destination city.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="amt"
+                                        type="number"
+                                        max="50000"
+                                        min="1000"
+                                        step="1"
+                                        class="form-control"
+                                        id="flightAmt"
+                                        placeholder="5000"
+                                        required
+                                    />
+                                    <label for="flightAmt">
+                                        Ticket Amount
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Please type a valid amount between 1,000
+                                        and 50,000.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success">
+                                    Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

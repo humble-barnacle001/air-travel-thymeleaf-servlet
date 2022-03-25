@@ -7,6 +7,12 @@
     </head>
     <body>
         <div class="card" th:fragment="offercard(offer)">
+            <img
+                th:src="'https://source.unsplash.com/random/400x300?airplane&sig=' + ${offer.getId().toHexString()}"
+                class="card-img-top"
+                alt="Airplane photo"
+                th:unless="${isAdmin}"
+            />
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h3 class="h4 text-info">
