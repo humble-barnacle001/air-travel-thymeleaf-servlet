@@ -4,7 +4,7 @@
     <body>
         <div class="card" th:fragment="flightcard(flight)">
             <img
-                th:src="'https://source.unsplash.com/random/400x300?airplane&sig=' + ${flight.getId().toHexString()}"
+                th:src="'https://source.unsplash.com/random/400x300?airport,airplane&sig=' + ${#strings.randomAlphanumeric(10)}"
                 class="card-img-top"
                 alt="Airplane photo"
                 th:unless="${isAdmin}"
