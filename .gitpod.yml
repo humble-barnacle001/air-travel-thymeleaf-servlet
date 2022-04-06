@@ -3,8 +3,8 @@ image:
 
 tasks:
   - name: "Load Enviornment Variables"
-    init: mvn clean install
-    command: eval $(gp env -e $(cat .env | xargs))
+    init: mvn clean install package
+    command: ./run.sh
 
 vscode:
   extensions:
