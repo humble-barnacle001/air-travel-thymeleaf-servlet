@@ -15,14 +15,15 @@
                         th:text="${flight.formattedTravelPlanString()}"
                     ></span>
                 </h3>
-                <!-- TODO: enable via string when searched -->
-                <!-- <h6 class="card-subtitle mb-2 text-muted" th:if="${isSearch}">
-                    Via
-                    <span th:text="${flight.getTravelVia()}"></span>
-                </h6> -->
+                <h6
+                    class="card-subtitle mb-2 text-dark"
+                    th:if="${isSearch && !flight.isDirect()}"
+                >
+                    <span th:text="${flight.viaString()}"></span>
+                </h6>
                 <h6
                     class="card-subtitle mb-2 text-muted"
-                    th:unless="${isSearch}"
+                    th:unless="${isSearch && !flight.isDirect()}"
                 >
                     By
                     <span th:text="${flight.getCompany()}"></span>

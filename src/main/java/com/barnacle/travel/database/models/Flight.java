@@ -66,9 +66,10 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Company: " + company +
-                "\nFrom: " + from +
-                "\nTo: " + to +
-                "\nInitial Amount: " + amt;
+        return "{Company: " + company +
+                ", From: " + from +
+                ", To: " + to +
+                ", Initial Amount: " + amt +
+                "}";
     }
 }

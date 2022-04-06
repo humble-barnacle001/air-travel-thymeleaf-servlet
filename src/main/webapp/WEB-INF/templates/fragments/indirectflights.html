@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div class="row" id="flights" th:fragment="flights">
+            <div
+                th:each="flight:${leggedflights}"
+                th:id="'flight-' + ${flight.getId().toHexString()} + ${flight.viaString()}"
+                class="col-12 col-md-6 col-lg-4 mt-3"
+            >
+                <div
+                    th:replace="fragments/flightcard :: flightcard(${flight})"
+                ></div>
+            </div>
+        </div>
+    </body>
+</html>

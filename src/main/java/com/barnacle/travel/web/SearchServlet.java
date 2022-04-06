@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.barnacle.travel.config.CustomWebContext;
 import com.barnacle.travel.config.TemplateEngineUtil;
-import com.barnacle.travel.database.models.Flight;
-import com.mongodb.client.MongoCollection;
+import com.barnacle.travel.util.DataFetcher;
 import com.mongodb.client.MongoDatabase;
 
 import org.thymeleaf.TemplateEngine;
@@ -28,7 +27,6 @@ public class SearchServlet extends HttpServlet {
         Optional<String> optionalFrom = Optional.ofNullable(req.getParameter("from"));
         Optional<String> optionalTo = Optional.ofNullable(req.getParameter("to"));
         MongoDatabase db = (MongoDatabase) sc.getAttribute("db");
-        MongoCollection<Flight> collection = db.getCollection("flights", Flight.class);
 
         try {
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(sc);
@@ -36,13 +34,17 @@ public class SearchServlet extends HttpServlet {
             if (optionalFrom.orElse("") != "" && optionalTo.orElse("") != "") {
                 String from = optionalFrom.get();
                 String to = optionalTo.get();
+
                 context.setVariable("isSearch", Boolean.TRUE);
                 context.setVariable("from", from);
                 context.setVariable("to", to);
 
-                // TODO: Implement search functionality
-                // TODO: Enable via string in flightcard.html
-                context.setVariable("flights", collection.find());
+                context.setVariable(
+                        "flights",
+                        DataFetcher.searchDirectFlights(db, from.trim(), to.trim()));
+                context.setVariable(
+                        "leggedflights",
+                        DataFetcher.searchFlights(db, from.trim(), to.trim()));
             } else
                 context.setVariable("isSearch", Boolean.FALSE);
             resp.setContentType("text/html;charset=UTF-8");

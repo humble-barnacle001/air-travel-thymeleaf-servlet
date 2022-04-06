@@ -87,10 +87,19 @@
                     to
                     <span class="text-info" th:text="${to}"></span>
                 </h2>
-                <div th:if="${flights}">
-                    <div th:replace="fragments/flights :: flights"></div>
+                <div th:if="${flights.size() > 0}" class="my-3">
+                    <h3 class="text-danger">Direct Flights</h3>
+                    <div th:replace="fragments/directflights :: flights"></div>
                 </div>
-                <div th:unless="${flights}">
+                <div th:if="${leggedflights.size() > 0}" class="my-3">
+                    <h3 class="text-danger">Flights with Legs</h3>
+                    <div
+                        th:replace="fragments/indirectflights :: flights"
+                    ></div>
+                </div>
+                <div
+                    th:unless="${flights.size() > 0 || leggedflights.size() > 0}"
+                >
                     <h3 class="text-danger text-center">No results found</h3>
                 </div>
             </div>
